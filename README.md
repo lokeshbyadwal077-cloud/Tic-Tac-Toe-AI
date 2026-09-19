@@ -94,17 +94,17 @@ Dark/Light Theme
 Move Animations
 Online Multiplayer Mode
 👨‍💻 Author
-Manish Mehra
+Lokesh Meena
 
 BCA Student | Frontend Developer | JavaScript Enthusiast | AI Learner
 
-🌐 GitHub: https://github.com/Manishmehra95
-💼 LinkedIn: https://www.linkedin.com/in/manish-mehra-0161043aa
+🌐 GitHub: https://www.github.com/in/Lokesh-Meena007
+💼 LinkedIn: https: www.linkedin.com/in/lokesh-meena-1b4a09383
 🤝 Connect With Me
 I'm always open to learning, collaborating on exciting projects, and connecting with fellow developers.
 
-GitHub: https://github.com/Manishmehra95
-LinkedIn: https://www.linkedin.com/in/manish-mehra-0161043aa
+GitHub://www.github.com/in/Lokesh-Meena007
+LinkedIn: www.linkedin.com/in/lokesh-meena-1b4a09383
 If you found this project helpful, consider giving it a ⭐ on GitHub!
 📄 License
 This project is created for educational and internship purposes.
