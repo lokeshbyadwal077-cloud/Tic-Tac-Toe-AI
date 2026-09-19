@@ -1,0 +1,417 @@
+/* =========================================================
+   Tic-Tac-Toe AI — Stylesheet
+   Design language: clean "control room" feel — deep navy
+   backdrop, crisp card, one confident accent color (cyan)
+   used sparingly for X, and a warm coral for O.
+   ========================================================= */
+
+:root {
+  --bg-navy: #0b1120;
+  --bg-navy-2: #131b30;
+  --card-bg: #ffffff;
+  --card-border: #e7eaf3;
+  --text-dark: #1b2136;
+  --text-muted: #6b7280;
+
+  --x-color: #0891b2;      /* cyan — human player */
+  --x-color-light: #e0f7fa;
+  --o-color: #f2542d;      /* warm coral — AI player */
+  --o-color-light: #fdeae2;
+
+  --win-highlight: #ffd166;
+  --shadow-card: 0 20px 60px rgba(11, 17, 32, 0.35);
+  --radius-lg: 22px;
+  --radius-md: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: radial-gradient(circle at 25% 15%, var(--bg-navy-2), var(--bg-navy) 65%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;   /* card aur footer ko vertically stack karega */
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ============ Ambient background glows ============ */
+.bg-glow {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(90px);
+  z-index: 0;
+  opacity: 0.25;
+}
+.glow-1 {
+  width: 380px;
+  height: 380px;
+  background: var(--x-color);
+  top: -100px;
+  left: -100px;
+}
+.glow-2 {
+  width: 340px;
+  height: 340px;
+  background: var(--o-color);
+  bottom: -100px;
+  right: -80px;
+}
+
+/* ============ Main game card ============ */
+.game-card {
+  position: relative;
+  z-index: 1;
+  width: 420px;
+  max-width: 94vw;
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: 30px 28px 26px;
+  animation: cardIn 0.5s ease;
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(18px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ============ Header ============ */
+.game-header {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.game-header h1 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text-dark);
+  letter-spacing: -0.5px;
+}
+
+.game-header h1 .accent {
+  color: var(--x-color);
+}
+
+.subtitle {
+  margin: 6px 0 0;
+  font-size: 12.5px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* ============ Status bar ============ */
+.status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #f6f8fc;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.status-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Space Mono", monospace;
+  font-weight: 700;
+  font-size: 14px;
+  background: var(--x-color-light);
+  color: var(--x-color);
+  transition: all 0.25s ease;
+}
+
+.status-text {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+/* State modifiers applied via JS */
+.status-bar.turn-o .status-icon {
+  background: var(--o-color-light);
+  color: var(--o-color);
+}
+.status-bar.win {
+  background: #eafaf0;
+  border-color: #b7ecc9;
+}
+.status-bar.lose {
+  background: #fdeeea;
+  border-color: #f6c6ba;
+}
+.status-bar.draw {
+  background: #fff8e6;
+  border-color: #ffe5a3;
+}
+
+/* ============ Score board ============ */
+.score-board {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.score-item {
+  flex: 1;
+  text-align: center;
+  background: #f6f8fc;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 10px 6px;
+}
+
+.score-label {
+  display: block;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.score-value {
+  display: block;
+  font-family: "Space Mono", monospace;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+/* ============ Game board grid ============ */
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.cell {
+  aspect-ratio: 1 / 1;
+  background: #f6f8fc;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  font-family: "Space Mono", monospace;
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--text-dark);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  user-select: none;
+}
+
+/* Hover only when the cell is empty and clickable */
+.cell:not(.filled):not(.locked):hover {
+  background: #eef2fb;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(11, 17, 32, 0.08);
+}
+
+.cell:active:not(.filled):not(.locked) {
+  transform: translateY(0) scale(0.97);
+}
+
+/* Filled cell colors depending on symbol */
+.cell.x-mark {
+  color: var(--x-color);
+}
+.cell.o-mark {
+  color: var(--o-color);
+}
+
+/* Pop-in animation when a mark is placed */
+.cell.filled .mark-inner {
+  display: inline-block;
+  animation: markIn 0.28s ease;
+}
+
+@keyframes markIn {
+  from { opacity: 0; transform: scale(0.4) rotate(-10deg); }
+  to { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+/* Winning cells glow */
+.cell.win-cell {
+  background: #fff6dd;
+  border-color: var(--win-highlight);
+  box-shadow: 0 0 0 2px var(--win-highlight) inset;
+  animation: winPulse 0.9s ease infinite;
+}
+
+@keyframes winPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+
+/* Locked = board disabled while AI "thinks" or game over */
+.cell.locked {
+  cursor: not-allowed;
+}
+
+/* ============ Controls ============ */
+.controls {
+  display: flex;
+  justify-content: center;
+}
+
+.restart-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--text-dark);
+  color: #fff;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 30px;
+  font-family: "Poppins", sans-serif;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.2s ease;
+}
+
+.restart-btn:hover {
+  background: #2b3350;
+  transform: translateY(-2px);
+}
+
+.restart-btn:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.restart-icon {
+  font-size: 15px;
+}
+
+/* ============ Result overlay ============ */
+.result-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 17, 32, 0.55);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  animation: overlayIn 0.25s ease;
+}
+/* When the `hidden` attribute is present, force it to stay hidden —
+   otherwise our `display: flex` above overrides the browser's
+   default hidden styling and the overlay shows on page load. */
+.result-overlay[hidden] {
+  display: none;
+}
+
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.result-card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: 34px 30px;
+  text-align: center;
+  width: 320px;
+  max-width: 88vw;
+  box-shadow: var(--shadow-card);
+  animation: resultIn 0.35s ease;
+}
+
+@keyframes resultIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.94); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.result-emoji {
+  font-size: 46px;
+  margin-bottom: 10px;
+}
+
+.result-title {
+  margin: 0 0 8px;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.result-desc {
+  margin: 0 0 22px;
+  font-size: 13.5px;
+  color: var(--text-muted);
+}
+
+.play-again-btn {
+  background: var(--x-color);
+  color: #fff;
+  border: none;
+  padding: 12px 26px;
+  border-radius: 30px;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.2s ease;
+}
+
+.play-again-btn:hover {
+  background: #067188;
+  transform: translateY(-2px);
+}
+/* ============ Footer ============ */
+.app-footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin-top: 18px;
+}
+
+.app-footer p {
+  margin: 0;
+  font-size: 12.5px;
+  color: #cbd3e6;
+  font-weight: 500;
+}
+
+.footer-highlight {
+  color: var(--x-color);
+  font-weight: 600;
+}
+
+/* ============ Mobile responsiveness ============ */
+@media (max-width: 420px) {
+  .game-card {
+    padding: 24px 18px 20px;
+  }
+  .cell {
+    font-size: 34px;
+  }
+  .game-header h1 {
+    font-size: 22px;
+  }
+}
