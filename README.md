@@ -1,4 +1,5 @@
 🎮 Tic-Tac-Toe AI
+
 An AI-powered Tic-Tac-Toe game built using HTML, CSS, and Vanilla JavaScript. This project implements the Minimax Algorithm, allowing the AI to make optimal decisions and providing an unbeatable gameplay experience.
 ____________________________________________________________________________________________________________________________________________________
 📌 Project Overview
