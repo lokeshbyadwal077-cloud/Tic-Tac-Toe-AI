@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tic-Tac-Toe AI | Unbeatable Minimax</title>
+
+  <!-- Google Font for a clean, modern look -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Space+Mono:wght@700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Soft decorative background glows -->
+  <div class="bg-glow glow-1"></div>
+  <div class="bg-glow glow-2"></div>
+
+  <main class="game-card">
+
+    <!-- ===== Title Section ===== -->
+    <header class="game-header">
+      <h1>Tic-Tac-Toe <span class="accent">AI</span></h1>
+      <p class="subtitle">Powered by the Minimax Algorithm — unbeatable, always.</p>
+    </header>
+
+    <!-- ===== Status Bar: shows whose turn it is / result ===== -->
+    <section class="status-bar" id="statusBar">
+      <div class="status-icon" id="statusIcon">✕</div>
+      <p class="status-text" id="statusText">Your turn</p>
+    </section>
+
+    <!-- ===== Score Board ===== -->
+    <section class="score-board">
+      <div class="score-item">
+        <span class="score-label">You (X)</span>
+        <span class="score-value" id="scoreX">0</span>
+      </div>
+      <div class="score-item">
+        <span class="score-label">Draws</span>
+        <span class="score-value" id="scoreDraw">0</span>
+      </div>
+      <div class="score-item">
+        <span class="score-label">AI (O)</span>
+        <span class="score-value" id="scoreO">0</span>
+      </div>
+    </section>
+
+    <!-- ===== The 3x3 Game Board ===== -->
+    <section class="board" id="board">
+      <!-- 9 cells generated dynamically in script.js, but static markup also works -->
+      <button class="cell" data-index="0"></button>
+      <button class="cell" data-index="1"></button>
+      <button class="cell" data-index="2"></button>
+      <button class="cell" data-index="3"></button>
+      <button class="cell" data-index="4"></button>
+      <button class="cell" data-index="5"></button>
+      <button class="cell" data-index="6"></button>
+      <button class="cell" data-index="7"></button>
+      <button class="cell" data-index="8"></button>
+    </section>
+
+    <!-- ===== Controls ===== -->
+    <section class="controls">
+      <button class="restart-btn" id="restartBtn">
+        <span class="restart-icon">↻</span> Restart Game
+      </button>
+    </section>
+
+  </main>
+</section>
+
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="app-footer">
+    <p>Made by MANISH MEHRA during my <span class="footer-highlight">CodSoft Internship</span></p>
+  </footer>
+
+  <!-- ===== Result Overlay (shown when game ends) ===== -->
+  <!-- ===== Result Overlay (shown when game ends) ===== -->
+  <div class="result-overlay" id="resultOverlay" hidden>
+    <div class="result-card">
+      <div class="result-emoji" id="resultEmoji">🎉</div>
+      <h2 class="result-title" id="resultTitle">You Win!</h2>
+      <p class="result-desc" id="resultDesc">Nice one — you beat the odds.</p>
+      <button class="play-again-btn" id="playAgainBtn">Play Again</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
